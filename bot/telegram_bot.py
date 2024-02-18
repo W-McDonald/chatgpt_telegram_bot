@@ -655,6 +655,7 @@ class ChatGPTTelegramBot:
 
         logging.info(
             f'New message received from user {update.message.from_user.name} (id: {update.message.from_user.id})')
+	logging.info(f'Message contents: {message_text(update.message)}')
         chat_id = update.effective_chat.id
         user_id = update.message.from_user.id
         prompt = message_text(update.message)
