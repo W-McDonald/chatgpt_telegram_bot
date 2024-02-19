@@ -11,7 +11,7 @@ class CryptoPlugin(Plugin):
     A plugin to fetch the current rate of various cryptocurrencies
     """
     def get_source_name(self) -> str:
-        return "CoinCap"
+        return "Coinbase"
 
     def get_spec(self) -> [Dict]:
         return [{
@@ -27,4 +27,4 @@ class CryptoPlugin(Plugin):
         }]
 
     async def execute(self, function_name, helper, **kwargs) -> Dict:
-        return requests.get(f"https://api.coincap.io/v2/rates/{kwargs['asset']}").json()
+        return requests.get(f"https://api.exchange.coinbase.com/products/{kwargs['asset']}-USD/ticker").json()
