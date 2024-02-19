@@ -653,9 +653,18 @@ class ChatGPTTelegramBot:
         if not await self.check_allowed_and_within_budget(update, context):
             return
 
-        logging.info(
-            f'New message received from user {update.message.from_user.name} (id: {update.message.from_user.id})')
-	logging.info(f'Message contents: {message_text(update.message)}')
+        if update.message.chat.type == 'private':
+            from_user_location = 'Private Chat'
+        elif update.message.chat.type == 'supergroup':
+            from_user_location = update.message.chat.title
+        else:
+            from_user_location = 'OTHER GROUP'
+
+        logging.info('New Message Received')
+        logging.info(f'Sender Location: ({from_user_location})')
+        logging.info(f'Sender Username: ({update.message.from_user.username})')
+        logging.info(f'Sender Message contents:\n{message_text(update.message)}')
+
         chat_id = update.effective_chat.id
         user_id = update.message.from_user.id
         prompt = message_text(update.message)
