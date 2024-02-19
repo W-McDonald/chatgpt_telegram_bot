@@ -4,3 +4,4 @@ __pycache__
 /usage_logs
 venv
 /.cache
+.env
